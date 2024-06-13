@@ -25,7 +25,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+            <a class="nav-link" href="{{route('table')}}">
               <i class="icon-command menu-icon"></i>
               <span class="menu-title">Tables</span>
             </a>
