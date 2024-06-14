@@ -35,9 +35,15 @@
          
           
           <li class="nav-item">
-            <a class="nav-link" href="docs/documentation.html">
+            <a class="nav-link" href="bar">
               <i class="icon-book menu-icon"></i>
               <span class="menu-title">Bar</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">Map</span>
             </a>
           </li>
         </ul>

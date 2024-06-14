@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Relevance of Topics</title>
-    <!-- Include Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div style="width: 80%; margin: auto;">
+@extends('admin.main')
+
+@section('style')
+
+@endsection
+@section('content')
+<div style="width: 80%; margin: auto;">
         <canvas id="myChart"></canvas>
     </div>
+@endsection
+   
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!-- JavaScript to create the chart -->
-    <script>
+<script>
+
         // Sample data (replace with your actual data)
-const topics = ['Technology', 'Science', 'Politics', 'Health', 'Business'];
+const topic = ['Technology', 'Science', 'Politics', 'Health', 'Business'];
 const relevanceValues = [80, 70, 60, 85, 75]; // Sample relevance values
 
 // Get the canvas element from HTML
@@ -24,7 +25,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: topics,
+        labels: topic,
         datasets: [{
             label: 'Relevance',
             data: relevanceValues,
@@ -59,7 +60,7 @@ const myChart = new Chart(ctx, {
             xAxes: [{
                 scaleLabel: {
                     display: true,
-                    labelString: 'Topics'
+                    labelString: 'topic'
                 }
             }]
         }
@@ -67,5 +68,5 @@ const myChart = new Chart(ctx, {
 });
 
     </script>
-</body>
-</html>
+@endsection
+    

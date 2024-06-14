@@ -30,3 +30,5 @@ Route::get('/map', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
 // Route::get('/chart-data', [ChartController::class, 'chartData']);
 Route::get('/chart-data', [ChartController::class, 'getChartData']);
+Route::get('/bar-data', [ChartController::class, 'getRelevanceData']);
+

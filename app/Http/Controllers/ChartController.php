@@ -34,6 +34,18 @@ class ChartController extends Controller
 
 
 
+    public function getRelevanceData()
+{
+    $topic = DataEntry::pluck('topic')->toArray(); // Assuming 'name' is the attribute for topic names
+    $relevanceValues = DataEntry::pluck('relevance')->toArray(); // Assuming 'relevance' is the attribute for relevance values
+
+    return response()->json([
+        'topic' => $topic,
+        'relevanceValues' => $relevanceValues,
+    ]);
 
     
+}
+
+
 }
