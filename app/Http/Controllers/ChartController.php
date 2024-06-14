@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DataEntry;
 use Illuminate\Http\Request;
-use App\Models\ChartData; // Adjust this based on your model setup
 
 class ChartController extends Controller
 {
@@ -21,14 +20,15 @@ class ChartController extends Controller
         if ($endYear) {
             $query->where('end_year', '<=', $endYear);
         }
+        
+        // Add conditions to exclude records where intensity or likelihood is 0
+        $query->where('intensity', '>', 0)
+              ->where('likelihood', '>', 0);
+
+        // Select only necessary columns
         $data = $query->select('end_year', 'intensity', 'likelihood')->get();
 
         // Return data as JSON
         return response()->json($data);
     }
-    
-
-    
-
-    
 }
