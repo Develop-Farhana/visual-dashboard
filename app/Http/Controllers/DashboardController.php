@@ -7,11 +7,17 @@ use App\Models\DataEntry;
 
 class DashboardController extends Controller
 {
+    public function demo()
+    {
+        $data = DataEntry::all();
+        return view('admin.table', ['data' => $data]);
+    }
+
     public function index(Request $request)
     {
         $query = DataEntry::query(); // Start building a query based on the DataEntry model
 
-        // Apply filters only if the respective parameters are filled (not null and not empty)
+        // Apply filters based on POST data
         if ($request->filled('end_year')) {
             $query->where('end_year', $request->input('end_year'));
         }

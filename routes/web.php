@@ -30,7 +30,12 @@ Route::get('/map', function () {
 Route::get('/map', function () {
     return view('admin.map');
 });
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
+// Route to display the dashboard initially
+Route::get('/dashboard', [DashboardController::class, 'demo'])->name('dashboard.demo');
+
+// Route to handle form submission and filtering (POST method)
+Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 // Route::get('/chart-data', [ChartController::class, 'chartData']);
 Route::get('/chart-data', [ChartController::class, 'getChartData']);
 Route::get('/bar-data', [ChartController::class, 'getRelevanceData']);

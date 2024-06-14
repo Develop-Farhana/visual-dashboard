@@ -12,7 +12,8 @@
 <div class="container">
     <h1>Dashboard</h1>
 
-    <form method="GET" action="{{ route('table') }}">
+    <form method="post" action="{{ route('dashboard.index') }}">
+        @csrf
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
