@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
+use App\Models\DataEntry;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,9 @@ Route::get('/graph', function () {
 Route::get('/bar', function () {
     return view('admin.bar');
 });
-
+Route::get('/map', function () {
+    return view('admin.map');
+});
 Route::get('/map', function () {
     return view('admin.map');
 });
@@ -32,3 +35,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
 Route::get('/chart-data', [ChartController::class, 'getChartData']);
 Route::get('/bar-data', [ChartController::class, 'getRelevanceData']);
 
+Route::get('/map-data', [ChartController::class, 'getMapData']);
+
+
+Route::get('/total-counts', [ChartController::class, 'getTotalCounts']);

@@ -4,7 +4,7 @@
             <img src="images/faces/face28.png">
           </div>
           <div class="user-name">
-              Edward Spencer
+              Farhana
           </div>
           <div class="user-designation">
               Developer
@@ -41,7 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="map">
               <i class="icon-book menu-icon"></i>
               <span class="menu-title">Map</span>
             </a>

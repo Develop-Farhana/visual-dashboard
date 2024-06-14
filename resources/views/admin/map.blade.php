@@ -1,43 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Map Showing Distribution of Data</title>
-    <!-- Include Leaflet CSS and JavaScript -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- Include a CSS file for custom styles (optional) -->
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-    <div id="map" style="height: 600px;"></div>
+@extends('admin.main')
+@section('style')
 
-    <!-- JavaScript to create the map -->
+@endsection
+    
+        
+    @section('content')
+    <div style="width: 50%; margin: auto;">
+        <canvas id="myPieChart"></canvas>
+    </div>
+    @endsection
+    
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // Sample data (replace with your actual data or fetch from a data source)
-const data = [
-    { country: 'USA', city: 'New York', latlng: [40.7128, -74.0060], intensity: 80 },
-    { country: 'USA', city: 'Los Angeles', latlng: [34.0522, -118.2437], intensity: 70 },
-    { country: 'UK', city: 'London', latlng: [51.5074, -0.1278], intensity: 85 },
-    { country: 'Germany', city: 'Berlin', latlng: [52.5200, 13.4050], intensity: 60 },
-    // Add more data points as needed
-];
+        document.addEventListener('DOMContentLoaded', function () {
+            axios.get('/total-counts')
+                .then(function (response) {
+                    const counts = response.data;
 
-// Initialize the map centered at a specific location (e.g., world view)
-const map = L.map('map').setView([20, 0], 2); // Centered around the world, zoom level 2
+                    // Extract data for the pie chart
+                    const data = {
+                        labels: ['Countries', 'Cities', 'Regions'],
+                        datasets: [{
+                            data: [counts.totalCountries, counts.totalCities, counts.totalRegions],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    };
 
-// Add a tile layer for the map (using OpenStreetMap tiles)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+                    // Get the context of the canvas element we want to select
+                    const ctx = document.getElementById('myPieChart').getContext('2d');
 
-// Loop through the data and add markers to the map
-data.forEach(entry => {
-    const { latlng, country, city, intensity } = entry;
-    const marker = L.marker(latlng).addTo(map);
-    marker.bindPopup(`<b>${city}, ${country}</b><br>Intensity: ${intensity}`);
-});
-
+                    // Initialize Chart.js
+                    new Chart(ctx, {
+                        type: 'pie',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Total Counts: Countries, Cities, Regions'
+                            },
+                            animation: {
+                                animateScale: true,
+                                animateRotate: true
+                            }
+                        }
+                    });
+                })
+                .catch(function (error) {
+                    console.error('Error fetching total counts:', error);
+                });
+        });
     </script>
-</body>
-</html>
+@endsection

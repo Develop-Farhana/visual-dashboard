@@ -47,5 +47,23 @@ class ChartController extends Controller
     
 }
 
+public function getMapData()
+    {
+        $mapData = DataEntry::all(); // Fetch map data from your database table
 
+        return response()->json($mapData);
+    }
+
+    public function getTotalCounts()
+    {
+        $totalCountries = DataEntry::distinct('country')->count('country');
+        $totalCities = DataEntry::distinct('city')->count('city');
+        $totalRegions = DataEntry::distinct('region')->count('region');
+
+        return response()->json([
+            'totalCountries' => $totalCountries,
+            'totalCities' => $totalCities,
+            'totalRegions' => $totalRegions,
+        ]);
+    }
 }
