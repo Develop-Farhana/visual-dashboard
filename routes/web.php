@@ -27,4 +27,5 @@ Route::get('/map', function () {
     return view('admin.map');
 });
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
-Route::get('/chart-data', [ChartController::class, 'chartData']);
+// Route::get('/chart-data', [ChartController::class, 'chartData']);
+Route::get('/chart-data', [ChartController::class, 'getChartData']);

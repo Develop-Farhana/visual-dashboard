@@ -8,22 +8,23 @@ use App\Models\ChartData; // Adjust this based on your model setup
 
 class ChartController extends Controller
 {
-    public function chartData()
+    public function getChartData(Request $request)
     {
-        // Example conditions (adjust based on your actual logic)
-        $startYear = 2000;
-        $endYear = 2020;
-        $country = 'YourCountry'; // Replace with actual country name or variable
-    
-        // Fetch data from your database based on conditions
-        $count = DataEntry::where('year', '>=', $startYear)
-                        ->where('year', '<=', $endYear)
-                        ->where('country', $country)
-                        ->count();
-    
-        return response()->json([
-            'count' => $count,
-        ]);
+        $startYear = $request->query('start_year');
+        $endYear = $request->query('end_year');
+
+        // Fetch data within the specified year range
+        $query = DataEntry::query();
+        if ($startYear) {
+            $query->where('end_year', '>=', $startYear);
+        }
+        if ($endYear) {
+            $query->where('end_year', '<=', $endYear);
+        }
+        $data = $query->select('end_year', 'intensity', 'likelihood')->get();
+
+        // Return data as JSON
+        return response()->json($data);
     }
     
 
