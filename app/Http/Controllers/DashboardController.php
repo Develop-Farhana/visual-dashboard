@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\DataEntry; // Assuming DataEntry is your model representing the data entries
+use App\Models\DataEntry;
 
 class DashboardController extends Controller
 {
@@ -11,48 +11,40 @@ class DashboardController extends Controller
     {
         $query = DataEntry::query(); // Start building a query based on the DataEntry model
 
-        // Check if 'end_year' parameter is present in the request
-        if ($request->has('end_year')) {
+        // Apply filters only if the respective parameters are filled (not null and not empty)
+        if ($request->filled('end_year')) {
             $query->where('end_year', $request->input('end_year'));
         }
 
-        // Check if 'topics' parameter is present in the request
-        if ($request->has('topics')) {
-            $query->whereIn('topic', $request->input('topics'));
+        if ($request->filled('topics')) {
+            $query->whereIn('topic', (array) $request->input('topics'));
         }
 
-        // Check if 'sector' parameter is present in the request
-        if ($request->has('sector')) {
+        if ($request->filled('sector')) {
             $query->where('sector', $request->input('sector'));
         }
 
-        // Check if 'region' parameter is present in the request
-        if ($request->has('region')) {
+        if ($request->filled('region')) {
             $query->where('region', $request->input('region'));
         }
 
-        // Check if 'pestle' parameter is present in the request
-        if ($request->has('pestle')) {
+        if ($request->filled('pestle')) {
             $query->where('pestle', $request->input('pestle'));
         }
 
-        // Check if 'source' parameter is present in the request
-        if ($request->has('source')) {
+        if ($request->filled('source')) {
             $query->where('source', $request->input('source'));
         }
 
-        // Check if 'swot' parameter is present in the request
-        if ($request->has('swot')) {
+        if ($request->filled('swot')) {
             $query->where('swot', $request->input('swot'));
         }
 
-        // Check if 'country' parameter is present in the request
-        if ($request->has('country')) {
+        if ($request->filled('country')) {
             $query->where('country', $request->input('country'));
         }
 
-        // Check if 'city' parameter is present in the request
-        if ($request->has('city')) {
+        if ($request->filled('city')) {
             $query->where('city', $request->input('city'));
         }
 

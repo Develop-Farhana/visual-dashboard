@@ -1,5 +1,13 @@
 @extends('admin.main')
 
+@section('style')
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+@endsection
 @section('content')
 <div class="container">
     <h1>Dashboard</h1>
@@ -15,7 +23,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="topics">Topics:</label>
-                <input type="text" name="topics[]" id="topics" class="form-control">
+                <input type="text" name="topics" id="topic" class="form-control">
             </div>
         </div>
         <div class="col-md-3">
@@ -35,7 +43,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label for="pest">PEST:</label>
-                <input type="text" name="pest" id="pest" class="form-control">
+                <input type="text" name="pestle" id="pest" class="form-control">
             </div>
         </div>
         <div class="col-md-3">
@@ -96,7 +104,7 @@
                 <td>{{ $item->topic }}</td>
                 <td>{{ $item->sector }}</td>
                 <td>{{ $item->region }}</td>
-                <td>{{ $item->pest }}</td>
+                <td>{{ $item->pestle }}</td>
                 <td>{{ $item->source }}</td>
                 <td>{{ $item->swot }}</td>
                 <td>{{ $item->country }}</td>
@@ -109,6 +117,7 @@
 @endsection
 
 @section('scripts')
+
 <script>
     $(document).ready(function() {
         $('#dataTable').DataTable({

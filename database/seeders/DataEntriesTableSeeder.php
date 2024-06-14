@@ -21,9 +21,9 @@ class DataEntriesTableSeeder extends Seeder
                 DataEntry::create([
                     'end_year' => $data[0],
                     'citylng' => (int) $data[1],
-                    'citylat' => Carbon::parse($data[2]),
-                    'intensity' => (float) $data[3],
-                    'sector' => filter_var($data[4], FILTER_VALIDATE_BOOLEAN),
+                    'citylat' => $data[2],
+                    'intensity' =>  $data[3],
+                    'sector' => $data[4],
                     'topic' => $data[5],
                     'insight' => $data[6],
                     'swot' => $data[7],
