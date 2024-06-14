@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.home');
+    return view('admin.charts');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
