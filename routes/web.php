@@ -17,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.charts');
+    return view('admin.graph');
+});
+Route::get('/bar', function () {
+    return view('admin.bar');
 });
 
+Route::get('/map', function () {
+    return view('admin.map');
+});
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('table');
+Route::get('/chart-data', [ChartController::class, 'chartData']);
