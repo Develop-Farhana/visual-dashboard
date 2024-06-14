@@ -31,4 +31,9 @@ class ChartController extends Controller
         // Return data as JSON
         return response()->json($data);
     }
+
+
+
+
+    
 }

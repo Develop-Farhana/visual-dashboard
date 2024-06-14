@@ -1,31 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Intensity and Likelihood Trends</title>
-    <!-- Include Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Include Axios for making HTTP requests -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <style>
-        #myChartContainer {
-            width: 80%;
-            margin: auto;
-        }
-    </style>
-</head>
-<body>
+@extends('admin.main')
+
+@section('style')
+<style>
+    #myChartContainer {
+        width: 80%;
+        margin: auto;
+    }
+    .chart-card {
+        background-color: #ffffff; /* White background */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 20px; /* Padding inside the card */
+        margin-bottom: 20px; /* Optional margin bottom for spacing */
+    }
+</style>
+@endsection
+
+@section('content')
+<div class="chart-card">
     <div id="myChartContainer">
         <canvas id="myChart"></canvas>
     </div>
+</div>
+@endsection
 
-    <!-- JavaScript to create the chart -->
-   <script>
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
     async function fetchChartData() {
         try {
-            // This is a placeholder function, you should replace it with actual logic to fetch your chart data
-            // Example: const response = await axios.get('/chart-data');
-            // Adjust this logic to match your actual endpoint and parameters
+            // Replace '/chart-data' with your actual endpoint to fetch chart data
             const response = await axios.get('/chart-data');
             return response.data;
         } catch (error) {
@@ -45,9 +50,6 @@
         // Find the highest and lowest years
         const highestYear = Math.max(...end_year);
         const lowestYear = Math.min(...end_year);
-
-        // Calculate the year range
-        const yearRange = highestYear - lowestYear;
 
         // Initialize variables to store total intensity and likelihood for each 10-year gap
         const totalIntensity = [];
@@ -142,7 +144,5 @@
 
     // Initialize the chart
     createChart();
-
-   </script>
-</body>
-</html>
+</script>
+@endsection

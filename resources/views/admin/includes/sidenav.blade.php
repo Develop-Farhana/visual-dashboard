@@ -12,18 +12,20 @@
         </div>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="">
               <i class="icon-box menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
         
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
+            <a class="nav-link" href="{{route('graph')}}">
               <i class="icon-pie-graph menu-icon"></i>
-              <span class="menu-title">Charts</span>
+              <span class="menu-title">Graph</span>
             </a>
           </li>
+
+          
           <li class="nav-item">
             <a class="nav-link" href="{{route('table')}}">
               <i class="icon-command menu-icon"></i>
@@ -35,7 +37,7 @@
           <li class="nav-item">
             <a class="nav-link" href="docs/documentation.html">
               <i class="icon-book menu-icon"></i>
-              <span class="menu-title">Documentation</span>
+              <span class="menu-title">Bar</span>
             </a>
           </li>
         </ul>

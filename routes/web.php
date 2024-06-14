@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.graph');
-});
+Route::get('/graph', function () {
+    return view('admin.graph'); // Renders the 'admin.graph' view
+})->name('graph');
+
 Route::get('/bar', function () {
     return view('admin.bar');
 });
