@@ -4,43 +4,37 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
 <style>
-    /* Custom DataTable styles */
-    #dataTable_wrapper {
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+    display: inline-block;
+    padding: 8px 12px; /* Adjusted padding for better spacing */
+    margin-right: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none; /* Ensure buttons look clickable */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    background-color: #fff; /* Default background color */
+}
 
-    #dataTable_wrapper .dataTables_length select {
-        width: 60px; /* Adjust width of page length select */
-    }
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #f0f0f0; /* Lighter background on hover */
+}
 
-    /* Pagination styles */
-    .dataTables_paginate .paginate_button {
-        display: inline-block;
-        padding: 8px 12px;
-        margin-right: 4px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        cursor: pointer;
-        color: #333;
-    }
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #007bff; /* Primary color for current page */
+    color: #fff;
+    border-color: #007bff;
+}
 
-    .dataTables_paginate .paginate_button:hover {
-        background-color: #f0f0f0;
-    }
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    cursor: default;
+    color: #aaa;
+    pointer-events: none; /* Disable click events */
+    background-color: #eee; /* Light gray background for disabled state */
+    border-color: #ddd;
+}
 
-    .dataTables_paginate .paginate_button.current {
-        background-color: #007bff;
-        color: #fff;
-        border-color: #007bff;
-    }
-
-    .dataTables_paginate .paginate_button.disabled {
-        cursor: default;
-        color: #aaa;
-    }
 </style>
 @endsection
 
@@ -112,68 +106,60 @@
             <div class="col-md-9">
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                    <button type="button" class="btn btn-primary ml-2" id="resetFilters">Reset</button>
+                   
                 </div>
             </div>
         </div>
     </form>
 
     <table id="dataTable" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>End Year</th>
-                <th>Topic</th>
-                <th>Sector</th>
-                <th>Region</th>
-                <th>PEST</th>
-                <th>Source</th>
-                <th>SWOT</th>
-                <th>Country</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $item)
-            <tr>
-                <td>{{ $item->id }}</td>
-                <td>{{ $item->end_year }}</td>
-                <td>{{ $item->topic }}</td>
-                <td>{{ $item->sector }}</td>
-                <td>{{ $item->region }}</td>
-                <td>{{ $item->pestle }}</td>
-                <td>{{ $item->source }}</td>
-                <td>{{ $item->swot }}</td>
-                <td>{{ $item->country }}</td>
-                <td>{{ $item->city }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>End Year</th>
+            <th>Topic</th>
+            <th>Sector</th>
+            <th>Region</th>
+            <th>PEST</th>
+            <th>Source</th>
+            <th>SWOT</th>
+            <th>Country</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($data as $item)
+        <tr>
+            <td>{{ $item->id }}</td>
+            <td>{{ $item->end_year }}</td>
+            <td>{{ $item->topic }}</td>
+            <td>{{ $item->sector }}</td>
+            <td>{{ $item->region }}</td>
+            <td>{{ $item->pestle }}</td>
+            <td>{{ $item->source }}</td>
+            <td>{{ $item->swot }}</td>
+            <td>{{ $item->country }}</td>
+            <td>{{ $item->city }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 </div>
 @endsection
 
-@section('scripts')
+@section('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-<script>
+    <script>
     $(document).ready(function() {
-        var dataTable = $('#dataTable').DataTable({
-            "paging": true, // Enable paging
-            "ordering": true, // Enable sorting
-            "searching": false // Disable search box for now
+        $('#dataTable').DataTable({
+            "paging": true,    // Enable paging
+            "ordering": true,  // Enable sorting
+            "searching": false  // Enable search box
             // Add your additional configuration options here
-        });
-
-        // Reset button functionality
-        $('#resetFilters').on('click', function() {
-            // Reset form inputs
-            $('form')[0].reset();
-
-            // Reset DataTable search and ordering
-            dataTable.search('').columns().search('').order([0, 'asc']).draw();
         });
     });
 </script>
+
 @endsection
