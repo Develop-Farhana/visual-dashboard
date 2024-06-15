@@ -31,7 +31,7 @@ Route::get('/map', function () {
     return view('admin.map');
 });
 // Route to display the dashboard initially
-Route::get('/dashboard', [DashboardController::class, 'demo'])->name('dashboard.demo');
+Route::get('/', [DashboardController::class, 'demo'])->name('dashboard.demo');
 
 // Route to handle form submission and filtering (POST method)
 Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

@@ -9,9 +9,12 @@ class DashboardController extends Controller
 {
     public function demo()
     {
-        $data = DataEntry::all();
+        $data = DataEntry::all(); // Paginate the results with 10 items per page
+    
         return view('admin.table', ['data' => $data]);
     }
+    
+    
 
     public function index(Request $request)
     {

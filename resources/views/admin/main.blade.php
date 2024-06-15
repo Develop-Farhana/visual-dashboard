@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <!-- Include any CSS files or stylesheets needed for your layout -->
-    <link rel="stylesheet" href="path/to/your/css/styles.css">
-</head>
-<body>
+    
     @include('admin.includes.header')
 
+</head>
+<body>
+   
     <div class="container-scroller">
         @include('admin.includes.nav')
 
@@ -27,7 +28,7 @@
     </div>
 
     <!-- Include any JavaScript files or scripts needed for your layout -->
-    <script src="path/to/your/js/scripts.js"></script>
+    
     @yield('script') <!-- Yield section for additional scripts from child views -->
 </body>
 </html>
