@@ -30,6 +30,9 @@ Route::get('/map', function () {
 Route::get('/map', function () {
     return view('admin.map');
 });
+
+Route::get('/get-relevance-data', [ChartController::class, 'getRelevanceData']);
+
 // Route to display the dashboard initially
 Route::get('/', [DashboardController::class, 'demo'])->name('dashboard.demo');
 
@@ -38,9 +41,7 @@ Route::post('/dashboard', [DashboardController::class, 'index'])->name('dashboar
 
 // Route::get('/chart-data', [ChartController::class, 'chartData']);
 Route::get('/chart-data', [ChartController::class, 'getChartData']);
-Route::get('/bar-data', [ChartController::class, 'getRelevanceData']);
 
 Route::get('/map-data', [ChartController::class, 'getMapData']);
-
 
 Route::get('/total-counts', [ChartController::class, 'getTotalCounts']);

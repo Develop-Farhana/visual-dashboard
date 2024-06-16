@@ -35,17 +35,20 @@ class ChartController extends Controller
 
 
     public function getRelevanceData()
-{
-    $topic = DataEntry::pluck('topic')->toArray(); // Assuming 'name' is the attribute for topic names
-    $relevanceValues = DataEntry::pluck('relevance')->toArray(); // Assuming 'relevance' is the attribute for relevance values
+    {
+        $dataEntries = DataEntry::orderBy('relevance', 'desc')
+                                ->take(5) // Adjust this to fetch top 5 or as needed
+                                ->get(['topic', 'relevance']);
 
-    return response()->json([
-        'topic' => $topic,
-        'relevanceValues' => $relevanceValues,
-    ]);
+        $topics = $dataEntries->pluck('topic')->toArray();
+        $relevanceValues = $dataEntries->pluck('relevance')->toArray();
 
-    
-}
+        return response()->json([
+            'topic' => $topics,
+            'relevanceValues' => $relevanceValues,
+        ]);
+    }
+
 
 public function getMapData()
     {
