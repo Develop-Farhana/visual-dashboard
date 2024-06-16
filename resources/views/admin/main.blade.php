@@ -8,6 +8,8 @@
     
     @include('admin.includes.header')
 
+    <!-- Yield section for additional styles from child views -->
+    @yield('style')
 </head>
 <body>
    

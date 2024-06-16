@@ -5,36 +5,35 @@
 
 <style>
     .dataTables_wrapper .dataTables_paginate .paginate_button {
-    display: inline-block;
-    padding: 8px 12px; /* Adjusted padding for better spacing */
-    margin-right: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #333;
-    text-decoration: none; /* Ensure buttons look clickable */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    background-color: #fff; /* Default background color */
-}
+        display: inline-block;
+        padding: 8px 12px; /* Adjusted padding for better spacing */
+        margin-right: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #333;
+        text-decoration: none; /* Ensure buttons look clickable */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        background-color: #fff; /* Default background color */
+    }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #f0f0f0; /* Lighter background on hover */
-}
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background-color: #f0f0f0; /* Lighter background on hover */
+    }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    background-color: #007bff; /* Primary color for current page */
-    color: #fff;
-    border-color: #007bff;
-}
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background-color: #007bff; /* Primary color for current page */
+        color: #fff;
+        border-color: #007bff;
+    }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-    cursor: default;
-    color: #aaa;
-    pointer-events: none; /* Disable click events */
-    background-color: #eee; /* Light gray background for disabled state */
-    border-color: #ddd;
-}
-
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+        cursor: default;
+        color: #aaa;
+        pointer-events: none; /* Disable click events */
+        background-color: #eee; /* Light gray background for disabled state */
+        border-color: #ddd;
+    }
 </style>
 @endsection
 
@@ -42,7 +41,7 @@
 <div class="container">
     <h1>Dashboard</h1>
 
-    <form method="post" action="{{ route('dashboard.index') }}">
+    <form method="post" action="{{ route('dashboard.index') }}" id="filterForm">
         @csrf
         <div class="row">
             <div class="col-md-3">
@@ -106,60 +105,63 @@
             <div class="col-md-9">
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                   
+                    <button type="submit" class="btn btn-primary" id="resetButton">Reset</button>
                 </div>
             </div>
         </div>
     </form>
 
     <table id="dataTable" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>End Year</th>
-            <th>Topic</th>
-            <th>Sector</th>
-            <th>Region</th>
-            <th>PEST</th>
-            <th>Source</th>
-            <th>SWOT</th>
-            <th>Country</th>
-            <th>City</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($data as $item)
-        <tr>
-            <td>{{ $item->id }}</td>
-            <td>{{ $item->end_year }}</td>
-            <td>{{ $item->topic }}</td>
-            <td>{{ $item->sector }}</td>
-            <td>{{ $item->region }}</td>
-            <td>{{ $item->pestle }}</td>
-            <td>{{ $item->source }}</td>
-            <td>{{ $item->swot }}</td>
-            <td>{{ $item->country }}</td>
-            <td>{{ $item->city }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>End Year</th>
+                <th>Topic</th>
+                <th>Sector</th>
+                <th>Region</th>
+                <th>PEST</th>
+                <th>Source</th>
+                <th>SWOT</th>
+                <th>Country</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($data as $item)
+            <tr>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->end_year }}</td>
+                <td>{{ $item->topic }}</td>
+                <td>{{ $item->sector }}</td>
+                <td>{{ $item->region }}</td>
+                <td>{{ $item->pestle }}</td>
+                <td>{{ $item->source }}</td>
+                <td>{{ $item->swot }}</td>
+                <td>{{ $item->country }}</td>
+                <td>{{ $item->city }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
 
 @section('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
-    <script>
+<script>
     $(document).ready(function() {
         $('#dataTable').DataTable({
             "paging": true,    // Enable paging
             "ordering": true,  // Enable sorting
-            "searching": false  // Enable search box
+            "searching": false // Disable search box
             // Add your additional configuration options here
+        });
+
+        $('#resetButton').on('click', function() {
+            $('#filterForm')[0].reset();
         });
     });
 </script>
-
 @endsection
