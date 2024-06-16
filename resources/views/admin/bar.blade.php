@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<h1>This is Top  5 Higest data</h1>
 <div style="width: 80%; margin: auto;">
     <canvas id="myChart"></canvas>
 </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataEntry;
 use Illuminate\Http\Request;
-
+use DB;
 class ChartController extends Controller
 {
     public function getChartData(Request $request)
@@ -35,19 +35,24 @@ class ChartController extends Controller
 
 
     public function getRelevanceData()
-    {
-        $dataEntries = DataEntry::orderBy('relevance', 'desc')
-                                ->take(5) // Adjust this to fetch top 5 or as needed
-                                ->get(['topic', 'relevance']);
+{
+    $dataEntries = DataEntry::select('topic', DB::raw('COUNT(*) as total_count'))
+                            ->groupBy('topic')
+                            ->havingRaw('COUNT(*) < 100')
+                            ->orderByDesc('total_count')
+                            ->limit(5)
+                            ->get();
 
-        $topics = $dataEntries->pluck('topic')->toArray();
-        $relevanceValues = $dataEntries->pluck('relevance')->toArray();
+    $topics = $dataEntries->pluck('topic')->toArray();
+    $relevanceValues = $dataEntries->pluck('total_count')->toArray(); // Rename this to match your frontend needs
 
-        return response()->json([
-            'topic' => $topics,
-            'relevanceValues' => $relevanceValues,
-        ]);
-    }
+    return response()->json([
+        'topic' => $topics,
+        'relevanceValues' => $relevanceValues,
+    ]);
+}
+
+    
 
 
 public function getMapData()
