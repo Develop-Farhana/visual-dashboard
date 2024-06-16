@@ -26,12 +26,7 @@
           </li>
 
           
-          <li class="nav-item">
-            <a class="nav-link" href="{{route('dashboard.index')}}">
-              <i class="icon-command menu-icon"></i>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
+         
          
           
           <li class="nav-item">

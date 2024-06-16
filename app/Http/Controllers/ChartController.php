@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\DataEntry;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 class ChartController extends Controller
 {
     public function getChartData(Request $request)
     {
+        if(Auth::check())
+        {
+
         $startYear = $request->query('start_year');
         $endYear = $request->query('end_year');
 
@@ -31,7 +35,8 @@ class ChartController extends Controller
         // Return data as JSON
         return response()->json($data);
     }
-
+ return redirect('login')->with('success', 'you are not allowed to access');
+}
 
 
     public function getRelevanceData()

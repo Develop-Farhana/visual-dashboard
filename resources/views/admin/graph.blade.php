@@ -17,6 +17,7 @@
 @endsection
 
 @section('content')
+<h1>This Year Wise  Intensity and Likelihood</h1>
 <div class="chart-card">
     <div id="myChartContainer">
         <canvas id="myChart"></canvas>

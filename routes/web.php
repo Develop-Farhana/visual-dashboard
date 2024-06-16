@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataController;
@@ -45,3 +46,17 @@ Route::get('/chart-data', [ChartController::class, 'getChartData']);
 Route::get('/map-data', [ChartController::class, 'getMapData']);
 
 Route::get('/total-counts', [ChartController::class, 'getTotalCounts']);
+
+
+//login
+
+
+Route::controller(AdminController::class)->group(function () {
+
+    Route::get('login', 'index')->name('login');
+    Route::get('logout', 'logout')->name('logout');
+    Route::post('validate_login', 'validate_login')->name('sample.validate_login');
+
+    Route::get('dashboard', 'dashboard')->name('dashboard');
+
+});

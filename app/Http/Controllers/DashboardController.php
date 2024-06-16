@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataEntry;
-
+use Auth;
 class DashboardController extends Controller
 {
     public function demo()
     {
+        if(Auth::check())
+        {
         $data = DataEntry::all(); // Paginate the results with 10 items per page
     
         return view('admin.table', ['data' => $data]);
     }
-    
+    return redirect('login')->with('success', 'you are not allowed to access');
+}
     
 
     public function index(Request $request)

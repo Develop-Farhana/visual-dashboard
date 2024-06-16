@@ -5,6 +5,7 @@
     
         
     @section('content')
+    <h1>This Is Country Total</h1>
     <div style="width: 50%; margin: auto;">
         <canvas id="myPieChart"></canvas>
     </div>
